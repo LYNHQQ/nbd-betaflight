@@ -101,8 +101,10 @@
 void targetConfiguration(void) {
 
     /* Configuration -> Other Features */
-    featureConfigMutable()->enabledFeatures |= (FEATURE_SERVO_TILT | FEATURE_TELEMETRY | FEATURE_LED_STRIP | FEATURE_OSD | FEATURE_CHANNEL_FORWARDING);
-
+    featureConfigMutable()->enabledFeatures |= (FEATURE_SERVO_TILT | FEATURE_TELEMETRY | FEATURE_OSD | FEATURE_CHANNEL_FORWARDING);
+    /* Configuration -> Dshot Beacon Configuration */
+    beeperConfigMutable()->dshotBeaconOffFlags = BEEPER_SILENCE;
+   
     /* Modes */
     modeActivationConditionsMutable(0)->modeId          = BOXARM;
     modeActivationConditionsMutable(0)->auxChannelIndex = AUX1 - NON_AUX_CHANNEL_COUNT;
@@ -176,7 +178,7 @@ void targetConfiguration(void) {
         strcpy(vtxTableConfigMutable()->channelNames[i], vtxTableChannelNames[i]);
     }
     for (uint8_t i = 0; i < _USER_VTX_TABLE_MAX_POWER_LEVELS; i++) {
-        vtxTableConfigMutable()->powerValues[i] = i;
+        vtxTableConfigMutable()->powerValues[i] = 2;
         strcpy(vtxTableConfigMutable()->powerLabels[i], rtc6705PowerNames[i]);
     }
 
@@ -224,8 +226,16 @@ void targetConfiguration(void) {
     vcdProfileMutable()->video_system = VIDEO_SYSTEM_NTSC;
 
     /* Configuration -> Personalization */
-    strcpy(pilotConfigMutable()->craftName, "Hummingbird RS");
+    strcpy(pilotConfigMutable()->craftName, USBD_PRODUCT_STRING);
 
+    /* GRYO/DYN/RPM Setting*/
+    gyroConfigMutable()->gyro_lpf1_static_hz            = 0;
+    gyroConfigMutable()->gyro_lpf1_dyn_min_hz           = 0;
+    dynNotchConfigMutable()->dyn_notch_max_hz           = 0;
+    rpmFilterConfigMutable()->rpm_filter_harmonics      = 1;
+    dynNotchConfigMutable()->dyn_notch_max_hz           = 750;
+    
+    
     /* PID Tuning */
     pidProfilesMutable(0)->dterm_lpf1_dyn_min_hz        = 67;
     pidProfilesMutable(0)->dterm_lpf1_dyn_max_hz        = 135;    
@@ -256,7 +266,7 @@ void targetConfiguration(void) {
     pidProfilesMutable(0)->dyn_idle_min_rpm             = 150;
     pidProfilesMutable(0)->dyn_idle_start_increase      = 60;
     pidProfilesMutable(0)->simplified_master_multiplier = 100;
-    pidProfilesMutable(0)->simplified_i_gain            = 100;
+    pidProfilesMutable(0)->simplified_i_gain            = 110;
     pidProfilesMutable(0)->simplified_d_gain            = 85;
     pidProfilesMutable(0)->simplified_pi_gain           = 95;
     pidProfilesMutable(0)->simplified_dmin_ratio        = 85;
@@ -264,16 +274,5 @@ void targetConfiguration(void) {
     pidProfilesMutable(0)->simplified_roll_pitch_ratio  = 105;
     pidProfilesMutable(0)->simplified_dterm_filter_multiplier=90;
 
-    /* PID Tuning -> Rateprofile Settings */
-    controlRateProfilesMutable(0)->thrMid8               = 30;
-    controlRateProfilesMutable(0)->thrExpo8              = 65;
-    controlRateProfilesMutable(0)->rcExpo[0]             = 54;
-    controlRateProfilesMutable(0)->rcExpo[1]             = 54;
-    controlRateProfilesMutable(0)->rcExpo[2]             = 54;
-    controlRateProfilesMutable(0)->rates[0]              = 52; 
-    controlRateProfilesMutable(0)->rates[1]              = 52; 
-    controlRateProfilesMutable(0)->rates[2]              = 57; 
-    controlRateProfilesMutable(0)->throttle_limit_type   = THROTTLE_LIMIT_TYPE_SCALE;
-    controlRateProfilesMutable(0)->throttle_limit_percent= 98;
 }
 #endif /* USE_TARGET_CONFIG */

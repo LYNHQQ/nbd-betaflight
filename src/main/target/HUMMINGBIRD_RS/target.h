@@ -21,15 +21,16 @@
 #pragma once
 
 #define TARGET_BOARD_IDENTIFIER         "HummingBird F4 V3 Rev_D"
-#define USBD_PRODUCT_STRING             "HummingBird F4 V3"
+#define USBD_PRODUCT_STRING             "Hummingbird RS"
 
 /* ======== LED ======== */
+#define LED0_PIN                        PC14
 #define USE_LED_STRIP
 #define USE_LED_STRIP_STATUS_MODE
-#define LED_STRIP_PIN                   PB1
 
-#define LED0_PIN                        PC14
-
+/* ======== BUZZER ======== */
+#define USE_BEEPER
+#define BEEPER_INVERTED
 /* ======== UART ======== */
 #define USE_UART
 
@@ -143,7 +144,6 @@
     TIMER_PIN_MAP( 1, MOTOR2_PIN   , 1,  0) \
     TIMER_PIN_MAP( 2, MOTOR3_PIN   , 1,  0) \
     TIMER_PIN_MAP( 3, MOTOR4_PIN   , 1,  0) \
-    TIMER_PIN_MAP( 4, LED_STRIP_PIN, 2,  0) 
 
 #define TARGET_IO_PORTA                 0xffff
 #define TARGET_IO_PORTB                 0xffff
