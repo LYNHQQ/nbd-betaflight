@@ -187,8 +187,12 @@ void targetConfiguration(void) {
 #undef _USER_VTX_TABLE_MAX_POWER_LEVELS
 
     /* PID Tuning -> Filter Setting */
-    dynNotchConfigMutable()->dyn_notch_count = 1;
-    dynNotchConfigMutable()->dyn_notch_q     = 500;
+    dynNotchConfigMutable()->dyn_notch_max_hz = 750;
+    dynNotchConfigMutable()->dyn_notch_count  = 1;
+    dynNotchConfigMutable()->dyn_notch_q      = 500;
+    rpmFilterConfigMutable()->rpm_filter_harmonics = 1;
+    gyroConfigMutable()->gyro_lpf1_static_hz  = 0;
+    gyroConfigMutable()->gyro_lpf1_dyn_min_hz = 0;
 
     /* Motors */
     motorConfigMutable()->digitalIdleOffsetValue = 600;
@@ -227,14 +231,6 @@ void targetConfiguration(void) {
 
     /* Configuration -> Personalization */
     strcpy(pilotConfigMutable()->craftName, USBD_PRODUCT_STRING);
-
-    /* GRYO/DYN/RPM Setting*/
-    gyroConfigMutable()->gyro_lpf1_static_hz            = 0;
-    gyroConfigMutable()->gyro_lpf1_dyn_min_hz           = 0;
-    dynNotchConfigMutable()->dyn_notch_max_hz           = 0;
-    rpmFilterConfigMutable()->rpm_filter_harmonics      = 1;
-    dynNotchConfigMutable()->dyn_notch_max_hz           = 750;
-    
     
     /* PID Tuning */
     pidProfilesMutable(0)->dterm_lpf1_dyn_min_hz        = 67;
