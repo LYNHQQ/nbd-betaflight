@@ -115,7 +115,7 @@ static const OSD_Entry menuMainEntries[] =
     { "SPECS", OME_Submenu, cmsMenuChange, &cmsx_menuSpec },
     { "MAIN",     OME_Submenu,  NULL, &cmsx_menuMain},
     { "EXIT",            OME_OSD_Exit, cmsMenuExit,   (void *)CMS_EXIT},
-    { "SAVE&REBOOT",     OME_OSD_Exit, cmsMenuExit,   (void *)CMS_POPUP_SAVEREBOOT},
+    { "SAVE&EXIT",     OME_OSD_Exit, cmsMenuExit,   (void *)CMS_POPUP_SAVE},
     {NULL, OME_END, NULL, NULL},
 };
 

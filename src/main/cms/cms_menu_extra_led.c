@@ -82,7 +82,7 @@ static const OSD_Entry cmsx_menuExtraLedEntries[] =
     { "FORCE LED2",    OME_TAB, NULL, &(OSD_TAB_t) { &cmsx_extraLedstripColor2, COLOR_COUNT - 1, lookupTableLedstripColors} },
     { "LED2 BRIGHT",   OME_UINT8,  NULL, &(OSD_UINT8_t) { &cmsx_extraLedstripColor2_brightness, 0, 255, 1} },
 
-    { "SAVE&REBOOT",     OME_OSD_Exit, cmsMenuExit,   (void *)CMS_POPUP_SAVEREBOOT },
+    { "SAVE&EXIT",     OME_OSD_Exit, cmsMenuExit,   (void *)CMS_POPUP_SAVE },
     { "BACK", OME_Back, NULL, NULL },
     { NULL, OME_END, NULL, NULL}
 };
